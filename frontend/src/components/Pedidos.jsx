@@ -26,7 +26,6 @@ const Pedidos = ({ pedidos, setPedidos }) => {
               </p>
               <div id="timer">
                 <CountdownTimer minutes={pedido.travelTime} />
-                <span> (incluso 30min de preparo)</span>
               </div>
               <svg
                 onClick={() => handleCancel(pedido)}
