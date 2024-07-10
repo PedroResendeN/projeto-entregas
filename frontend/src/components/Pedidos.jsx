@@ -18,8 +18,9 @@ const Pedidos = ({ pedidos, setPedidos }) => {
                 <strong>Compra:</strong> {pedido.itens}
               </p>
               <div id="timer">
-                <CountdownTimer minutes={pedido.travelTime + 30} />{" "}
+                <CountdownTimer minutes={pedido.travelTime} />{" "}
                 {/* Tempo de viagem + 30min de preparo */}
+                <span> (incluso 30min de preparo)</span>
               </div>
               <button onClick={() => handleCancel(index)} id="cancel-button">
                 Cancelar

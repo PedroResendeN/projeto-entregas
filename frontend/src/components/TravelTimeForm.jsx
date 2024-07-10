@@ -93,7 +93,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
       }
     }
 
-    totalMinutes += 30;
+    totalMinutes += 30; // Adiciona 30 minutos de preparo
     return totalMinutes;
   };
 
