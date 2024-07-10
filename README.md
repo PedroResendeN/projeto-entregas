@@ -1,6 +1,6 @@
 <h1>projeto-frete</h1>
 
- Simulação de tempo de entrega de um pedido usando a API Google Directions
+ Simulação de tempo de entrega de um restaurante usando a API Google Directions
 
 <h2>Pré-requisitos</h2>
 
@@ -12,7 +12,7 @@
  <li>Clone o repositório:</li>
  <ul>
   <li>```bash</li>
-  <li>git clone https://github.com/PedroResendeN/projeto-frete.git</li>
+  <li>git clone https://github.com/PedroResendeN/projeto-entregas.git</li>
  </ul>
  <li>Instale as dependências do servidor e o inicie:</li>
  <ul>
