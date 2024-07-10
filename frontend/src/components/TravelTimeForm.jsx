@@ -85,7 +85,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
     setItens("");
     setCep("");
     setNumero("");
-    setEndereco(null); // Limpa o endereço após a compra
+    setEndereco(null);
   };
 
   const calculateExpandedTime = (timeText) => {
