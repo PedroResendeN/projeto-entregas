@@ -2,6 +2,11 @@ import "./TravelTimeForm.css";
 import React, { useState } from "react";
 import axios from "axios";
 
+const generateRandomId = () => {
+  const randomId = Math.floor(100000 + Math.random() * 900000);
+  return randomId.toString().padStart(6, "0");
+};
+
 const TravelTimeForm = ({ onTravelTimeCalculated }) => {
   const [cep, setCep] = useState("");
   const [numero, setNumero] = useState("");
@@ -67,6 +72,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
       const expandedTimeInMinutes = calculateExpandedTime(travelTimeText);
 
       onTravelTimeCalculated({
+        id: generateRandomId(),
         travelTime: expandedTimeInMinutes,
         itens,
       });

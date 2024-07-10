@@ -2,15 +2,9 @@ import "./Pedidos.css";
 import React from "react";
 import CountdownTimer from "./CountdownTimer";
 
-// Função para gerar um número aleatório de 6 dígitos formatado
-const generateRandomId = () => {
-  const randomId = Math.floor(100000 + Math.random() * 900000);
-  return randomId.toString().padStart(6, "0");
-};
-
 const Pedidos = ({ pedidos, setPedidos }) => {
   const handleCancel = (pedido) => {
-    setPedidos((prevPedidos) => prevPedidos.filter((p) => p !== pedido));
+    setPedidos((prevPedidos) => prevPedidos.filter((p) => p.id !== pedido.id));
   };
 
   return (
@@ -18,9 +12,9 @@ const Pedidos = ({ pedidos, setPedidos }) => {
       <h2>Pedidos</h2>
       <ul>
         {pedidos.length > 0 ? (
-          pedidos.map((pedido, index) => (
-            <li key={index}>
-              <p id="num-pedido">Pedido #{generateRandomId()}</p>
+          pedidos.map((pedido) => (
+            <li key={pedido.id}>
+              <p id="num-pedido">Pedido #{pedido.id}</p>
               <p id="itens-comprados">
                 <strong>Compra:</strong> {pedido.itens}
               </p>
