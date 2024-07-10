@@ -68,14 +68,16 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
 
       onTravelTimeCalculated({ travelTime: expandedTimeInMinutes, itens });
       setError("");
+
+      // Limpar o formulário
+      setCep("");
+      setNumero("");
+      setItens("");
+      setEndereco(null);
     } catch (error) {
       console.error("Erro ao buscar o tempo de viagem:", error);
       setError("Erro ao buscar o tempo de viagem.");
     }
-
-    setItens("");
-    setCep("");
-    setNumero("");
   };
 
   const calculateExpandedTime = (timeText) => {
@@ -171,7 +173,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
           <button type="submit">Comprar</button>
         </form>
       )}
-      {error && <p style={{ color: "white" }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };

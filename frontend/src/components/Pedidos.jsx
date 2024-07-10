@@ -2,22 +2,33 @@ import "./Pedidos.css";
 import React from "react";
 import CountdownTimer from "./CountdownTimer";
 
-const Pedidos = ({ pedidos }) => {
+const Pedidos = ({ pedidos, setPedidos }) => {
+  const handleCancel = (index) => {
+    setPedidos((prevPedidos) => prevPedidos.filter((_, i) => i !== index));
+  };
+
   return (
     <div id="container-pedidos">
       <h2>Pedidos</h2>
       <ul>
-        {pedidos.map((pedido, index) => (
-          <li key={index}>
-            <p id="itens-comprados">
-              <strong>Compra:</strong> {pedido.itens}
-            </p>
-            <div id="timer">
-              <CountdownTimer minutes={pedido.travelTime} />
-              <span id="aviso">(Incluso 30min de preparo)</span>
-            </div>
-          </li>
-        ))}
+        {pedidos.length > 0 ? (
+          pedidos.map((pedido, index) => (
+            <li key={index}>
+              <p id="itens-comprados">
+                <strong>Compra:</strong> {pedido.itens}
+              </p>
+              <div id="timer">
+                <CountdownTimer minutes={pedido.travelTime + 30} />{" "}
+                {/* Tempo de viagem + 30min de preparo */}
+              </div>
+              <button onClick={() => handleCancel(index)} id="cancel-button">
+                Cancelar
+              </button>
+            </li>
+          ))
+        ) : (
+          <li>Nenhum pedido disponível</li>
+        )}
       </ul>
     </div>
   );

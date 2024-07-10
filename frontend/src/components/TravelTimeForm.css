@@ -17,9 +17,12 @@ label {
 }
 
 label input {
-    width: 100%;
-    outline: none;
-    margin: 5px 0;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 hr {

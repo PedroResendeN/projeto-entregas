@@ -1,33 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const CountdownTimer = ({ minutes }) => {
   const [timeLeft, setTimeLeft] = useState(minutes * 60);
 
   useEffect(() => {
-    if (timeLeft > 0) {
-      const intervalId = setInterval(() => {
-        setTimeLeft(timeLeft - 1);
-      }, 1000);
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+    }, 1000);
 
-      return () => clearInterval(intervalId);
-    }
-  }, [timeLeft]);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    setTimeLeft(minutes * 60);
+  }, [minutes]);
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const secondsLeft = seconds % 60;
-    return `${minutes}:${secondsLeft < 10 ? "0" : ""}${secondsLeft}`;
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  return (
-    <div>
-      {timeLeft > 0 ? (
-        <p>Tempo restante: {formatTime(timeLeft)}</p>
-      ) : (
-        <p>Pedido Concluído!</p>
-      )}
-    </div>
-  );
+  return <div>{formatTime(timeLeft)}</div>;
 };
 
 export default CountdownTimer;
