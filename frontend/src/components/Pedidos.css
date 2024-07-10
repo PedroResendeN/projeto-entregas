@@ -53,17 +53,7 @@
 }
 
 #cancel-button {
-    background-color: #EA4947;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    margin: 0;
-    padding: 5px 10px;
+    fill: #EA4947;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: flex-start;
-}
-
-#cancel-button:hover {
-    background-color: #ff0400;
 }

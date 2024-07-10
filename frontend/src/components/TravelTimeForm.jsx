@@ -1,5 +1,5 @@
 import "./TravelTimeForm.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const TravelTimeForm = ({ onTravelTimeCalculated }) => {
@@ -8,6 +8,15 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
   const [itens, setItens] = useState("");
   const [endereco, setEndereco] = useState(null);
   const [error, setError] = useState("");
+  const [idCounter, setIdCounter] = useState(1); // Inicializa o contador de ID
+
+  useEffect(() => {
+    // Restaura o contador de ID do localStorage se existir
+    const savedCounter = localStorage.getItem("idCounter");
+    if (savedCounter) {
+      setIdCounter(parseInt(savedCounter, 10));
+    }
+  }, []);
 
   const handleCepChange = (e) => {
     setCep(e.target.value);
@@ -66,18 +75,26 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
       const travelTimeText = response.data.travelTime;
       const expandedTimeInMinutes = calculateExpandedTime(travelTimeText);
 
-      onTravelTimeCalculated({ travelTime: expandedTimeInMinutes, itens });
+      onTravelTimeCalculated({
+        id: idCounter,
+        travelTime: expandedTimeInMinutes,
+        itens,
+      });
+      setIdCounter((prevCounter) => {
+        const newCounter = prevCounter + 1;
+        localStorage.setItem("idCounter", newCounter); // Salva o novo contador no localStorage
+        return newCounter;
+      });
       setError("");
-
-      // Limpar o formulário
-      setCep("");
-      setNumero("");
-      setItens("");
-      setEndereco(null);
     } catch (error) {
       console.error("Erro ao buscar o tempo de viagem:", error);
       setError("Erro ao buscar o tempo de viagem.");
     }
+
+    setItens("");
+    setCep("");
+    setNumero("");
+    setEndereco(null); // Limpa o endereço após a compra
   };
 
   const calculateExpandedTime = (timeText) => {
@@ -93,7 +110,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
       }
     }
 
-    totalMinutes += 30; // Adiciona 30 minutos de preparo
+    totalMinutes += 30;
     return totalMinutes;
   };
 
@@ -141,6 +158,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
             onChange={handleCepChange}
             placeholder="Digite o CEP"
             required
+            maxLength={9}
           />
         </label>
         <label>
@@ -153,7 +171,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
             required
           />
         </label>
-        <button type="submit">Confirmar</button>
+        <button type="submit">Buscar</button>
       </form>
       {endereco && (
         <div id="dados-cep">
@@ -173,7 +191,7 @@ const TravelTimeForm = ({ onTravelTimeCalculated }) => {
           <button type="submit">Comprar</button>
         </form>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "yellow" }}>{error}</p>}
     </div>
   );
 };
