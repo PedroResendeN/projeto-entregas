@@ -1,0 +1,61 @@
+#form-dados {
+    background-color: #fff;
+    min-width: 270px;
+    max-height: 460px;
+    padding: 30px 30px 15px;
+    border-radius: 15px 15px 0 0;
+}
+
+.icone {
+    text-align: center;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+label {
+    display: block;
+}
+
+label input {
+    width: 100%;
+    outline: none;
+    margin: 5px 0;
+}
+
+hr {
+    margin: 10px 0 5px;
+}
+
+button {
+    background-color: #EA4947;
+    display: block;
+    border: none;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px auto 0;
+    padding: 0 10px;
+    height: 30px;
+    width: 80px;
+    transition: .4s;
+}
+
+button:hover {
+    background-color: #ff0400;
+}
+
+#dados-cep {
+    background-color: #fff;
+    padding: 0 30px;
+}
+
+#dados-cep p {
+    padding-bottom: 5px;
+}
+
+#form-comprar {
+    margin-top: -10px;
+    background-color: #fff;
+    padding-bottom: 30px;
+    border-radius: 0 0 15px 15px;
+}
