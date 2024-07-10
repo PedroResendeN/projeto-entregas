@@ -2,11 +2,15 @@ import "./Pedidos.css";
 import React from "react";
 import CountdownTimer from "./CountdownTimer";
 
+// Função para gerar um número aleatório de 6 dígitos formatado
+const generateRandomId = () => {
+  const randomId = Math.floor(100000 + Math.random() * 900000);
+  return randomId.toString().padStart(6, "0");
+};
+
 const Pedidos = ({ pedidos, setPedidos }) => {
-  const handleCancel = (id) => {
-    setPedidos((prevPedidos) =>
-      prevPedidos.filter((pedido) => pedido.id !== id)
-    );
+  const handleCancel = (pedido) => {
+    setPedidos((prevPedidos) => prevPedidos.filter((p) => p !== pedido));
   };
 
   return (
@@ -14,9 +18,9 @@ const Pedidos = ({ pedidos, setPedidos }) => {
       <h2>Pedidos</h2>
       <ul>
         {pedidos.length > 0 ? (
-          pedidos.map((pedido) => (
-            <li key={pedido.id}>
-              <span>Pedido #{pedido.id}. </span>
+          pedidos.map((pedido, index) => (
+            <li key={index}>
+              <p id="num-pedido">Pedido #{generateRandomId()}</p>
               <p id="itens-comprados">
                 <strong>Compra:</strong> {pedido.itens}
               </p>
@@ -25,7 +29,7 @@ const Pedidos = ({ pedidos, setPedidos }) => {
                 <span> (incluso 30min de preparo)</span>
               </div>
               <svg
-                onClick={() => handleCancel(pedido.id)}
+                onClick={() => handleCancel(pedido)}
                 id="cancel-button"
                 xmlns="http://www.w3.org/2000/svg"
                 height="30px"
